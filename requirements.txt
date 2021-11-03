@@ -1,4 +1,4 @@
-solidAPI==0.1.8.8
+solidAPI==0.1.8.9
 youtube-search==2.1.0
 git+https://github.com/pyrogram/pyrogram@master
 py-tgcalls==0.8.1rc1

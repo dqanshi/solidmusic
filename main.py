@@ -1,5 +1,4 @@
 import asyncio
-import shutil
 import os
 
 from pytgcalls import idle

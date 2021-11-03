@@ -20,10 +20,10 @@ def play_keyboard(user_id: int):
 async def play_(client: Client, message: types.Message):
     replied = message.reply_to_message
     bot_username = (await client.get_me()).username
-    query = " ".join(message.command[1:])
     user_id = message.from_user.id
     chat_id = message.chat.id
     if not replied:
+        query = " ".join(message.command[1:])
         try:
             yts = yt_search(query)
         except IndexError:
