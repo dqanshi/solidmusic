@@ -42,7 +42,7 @@ async def gstats_(client: Client, message: types.Message):
         ram,
         python_version.split()[0],
         pyrogram_version,
-        pytgcalls_version,
+        pytgcalls_version.__version__,
         len(mods),
         chats,
         pm,
