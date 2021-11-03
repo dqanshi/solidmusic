@@ -28,7 +28,7 @@ async def gstats_(client: Client, message: types.Message):
     used = str(hdd.used / (1024.0 ** 3))
     free = str(hdd.free / (1024.0 ** 3))
     modules = 0
-    for path in os.listdir("../handlers"):
+    for path in os.listdir("handlers"):
         if path.startswith("__init__.py"):
             modules -= 1
         if path.endswith(".py"):
