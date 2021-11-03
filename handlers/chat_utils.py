@@ -4,21 +4,21 @@ from pyrogram import filters, Client
 from pyrogram.types import ChatMemberUpdated, Message
 
 from base.client_base import user
-from solidAPI.chat import add_chat, del_chat
+from solidAPI.chat import add_chat, del_chat, get_chat
 from solidAPI import get_message as gm
 
 
-@Client.on_chat_member_updated(filters=filters.group)
+@Client.on_chat_member_updated(filters.group)
 async def on_bot_added(client: Client, msg: ChatMemberUpdated):
-    try:
-        bot_id = (await client.get_me()).id
-        chat_id = msg.chat.id
-        members_id = msg.new_chat_member.user.id
-        lang = msg.new_chat_member.invited_by.language_code
-        if members_id == bot_id:
-            add_chat(chat_id, lang if lang else "en")
-    except AttributeError:
-        pass
+    bot_id = (await client.get_me()).id
+    chat_id = msg.chat.id
+    members_id = msg.new_chat_member.user.id
+    lang = msg.new_chat_member.invited_by.language_code
+    if members_id == bot_id:
+        x = get_chat(chat_id)
+        if not x:
+            return add_chat(chat_id, lang if lang else "en")
+        return
 
 
 @Client.on_message(filters=filters.left_chat_member)
