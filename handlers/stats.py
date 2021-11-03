@@ -2,9 +2,8 @@ import os
 from platform import system, machine
 from psutil import virtual_memory, disk_usage
 from sys import version as python_version
-from pyrogram import __version__ as pyrogram_version
 from pytgcalls import __version__ as pytgcalls_version
-from pyrogram import Client, filters, types
+from pyrogram import Client, filters, types, __version__ as pyrogram_version
 from utils.decorators import authorized_only
 from utils.functions import group_only
 from solidAPI.other import get_stats, get_message as gm
@@ -27,12 +26,12 @@ async def gstats_(client: Client, message: types.Message):
     total = str(hdd.total / (1024.0 ** 3))
     used = str(hdd.used / (1024.0 ** 3))
     free = str(hdd.free / (1024.0 ** 3))
-    modules = 0
+    mods = []
     for path in os.listdir("handlers"):
-        if path.startswith("__init__.py"):
-            modules -= 1
-        if path.endswith(".py"):
-            modules += 1
+        if path.startswith("__"):
+            pass
+        else:
+            mods.append(path)
     msgs = gm(chat_id, "global_stats_details").format(
         bot_fullname,
         system(),
@@ -44,7 +43,7 @@ async def gstats_(client: Client, message: types.Message):
         python_version.split()[0],
         pyrogram_version,
         pytgcalls_version,
-        modules,
+        len(mods),
         chats,
         pm,
     )
