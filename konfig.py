@@ -12,7 +12,7 @@ class Config:
     API_ID = int(getenv("API_ID"))
     API_HASH = getenv("API_HASH")
     BOT_TOKEN = getenv("BOT_TOKEN")
-    MULTI_THREAD = getenv("MULTI_THREAD", False)
+    MULTI_THREAD = getenv("MULTI_THREAD", None)
     SESSION = getenv("SESSION")
 
 

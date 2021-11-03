@@ -16,4 +16,4 @@ user = Client(
     api_hash=config.API_HASH,
 )
 
-call_py = PyTgCalls(user) if not config.MULTI_THREAD else PyTgCalls(user, multi_thread=True)
+call_py = PyTgCalls(user, multi_thread=(False if not config.MULTI_THREAD else True))

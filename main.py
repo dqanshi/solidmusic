@@ -19,8 +19,6 @@ async def mulai_bot():
     await idle()
     print("[INFO]: STOPPING BOT")
     await bot.stop()
-    if os.path.isdir("search"):
-        shutil.rmtree("search")
 
 
 loop = asyncio.get_event_loop()

@@ -68,7 +68,7 @@ class CallBase:
             query = playlist[chat_id][0]["uri"]
             title = playlist[chat_id][0]["title"]
             await self.stream_change(chat_id, query)
-            return get_message(chat_id, "track_skipped").format(query)
+            return get_message(chat_id, "track_skipped").format(title)
         if not playlist:
             return get_message(chat_id, "no_playlists")
 

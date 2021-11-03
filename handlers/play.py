@@ -18,56 +18,61 @@ def play_keyboard(user_id: int):
 
 @Client.on_message(filters.command("play") & group_only)
 async def play_(client: Client, message: types.Message):
+    replied = message.reply_to_message
     bot_username = (await client.get_me()).username
     query = " ".join(message.command[1:])
     user_id = message.from_user.id
     chat_id = message.chat.id
-    try:
-        yts = yt_search(query)
-    except IndexError:
-        return await message.reply(gm(chat_id, "give_me_title"))
-    proc = await message.reply(gm(chat_id, "searching"))
-    cache = []
-    music_result[chat_id] = []
-    for count, j in enumerate(yts, start=1):
-        cache.append(j)
-        if count % 5 == 0:
-            music_result[chat_id].append(cache)
-            cache = []
-        if count == len(yts):
-            music_result[chat_id].append(cache)
-    yts.clear()
-    k = 0
-    results = res_music(k, music_result[chat_id][0], bot_username, chat_id)
+    if not replied:
+        try:
+            yts = yt_search(query)
+        except IndexError:
+            return await message.reply(gm(chat_id, "give_me_title"))
+        proc = await message.reply(gm(chat_id, "searching"))
+        cache = []
+        music_result[chat_id] = []
+        for count, j in enumerate(yts, start=1):
+            cache.append(j)
+            if count % 5 == 0:
+                music_result[chat_id].append(cache)
+                cache = []
+            if count == len(yts):
+                music_result[chat_id].append(cache)
+        yts.clear()
+        k = 0
+        results = res_music(k, music_result[chat_id][0], bot_username, chat_id)
 
-    temps = []
-    keyboards = []
-    in_board = list(play_keyboard(user_id))
-    for count, j in enumerate(in_board, start=1):
-        temps.append(j)
-        if count % 3 == 0:
-            keyboards.append(temps)
-            temps = []
-        if count == len(in_board):
-            keyboards.append(temps)
-    await proc.delete()
-    await client.send_message(
-        chat_id,
-        f"{results}",
-        reply_markup=types.InlineKeyboardMarkup(
-            [
-                keyboards[0],
-                keyboards[1],
+        temps = []
+        keyboards = []
+        in_board = list(play_keyboard(user_id))
+        for count, j in enumerate(in_board, start=1):
+            temps.append(j)
+            if count % 3 == 0:
+                keyboards.append(temps)
+                temps = []
+            if count == len(in_board):
+                keyboards.append(temps)
+        await proc.delete()
+        return await client.send_message(
+            chat_id,
+            f"{results}",
+            reply_markup=types.InlineKeyboardMarkup(
                 [
-                    button_keyboard(f"{emoji.RIGHT_ARROW}", f"next|{user_id}"),
-                ],
-                [
-                    button_keyboard(f"{gm(chat_id, 'close_btn_name')} {emoji.WASTEBASKET}", f"close|{user_id}"),
-                ],
-            ]
-        ),
-        disable_web_page_preview=True,
-    )
+                    keyboards[0],
+                    keyboards[1],
+                    [
+                        button_keyboard(f"{emoji.RIGHT_ARROW}", f"next|{user_id}"),
+                    ],
+                    [
+                        button_keyboard(f"{gm(chat_id, 'close_btn_name')} {emoji.WASTEBASKET}", f"close|{user_id}"),
+                    ],
+                ]
+            ),
+            disable_web_page_preview=True,
+        )
+    if replied:
+        if replied.voice or replied.audio:
+            return await message.reply("this feature is under development")
 
 
 @Client.on_message(filters.command("playlist") & group_only)

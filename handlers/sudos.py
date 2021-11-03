@@ -30,23 +30,23 @@ async def update_sudo(message: types.Message, chat_id: int, sudo_id: int, status
                 x = put_sudo(chat_id, sudo_id)
                 status = x["status"]
                 if status == 200:
-                    return get_message(chat_id, "added_sudo")
+                    return get_message(chat_id, "added_sudo").format(mention_user)
                 if status == 400:
-                    return get_message(chat_id, "already_become_sudo")
+                    return get_message(chat_id, "already_become_sudo").format(mention_user)
                 return
             return
         x = add_sudo(chat_id, sudo_id)
         if x == 200:
-            return get_message(chat_id, "added_sudo")
+            return get_message(chat_id, "added_sudo").format(mention_user)
         if x == 400:
-            return get_message(chat_id, "already_become_sudo")
+            return get_message(chat_id, "already_become_sudo").format(mention_user)
         return
     if status == "delete":
         x = del_sudo(chat_id, sudo_id)
         if x == 200:
-            return get_message(chat_id, "deleted_sudo")
+            return get_message(chat_id, "deleted_sudo").format(mention_user)
         if x == 404:
-            return get_message(chat_id, "already_deleted_sudo")
+            return get_message(chat_id, "already_deleted_sudo").format(mention_user)
         return
 
 
