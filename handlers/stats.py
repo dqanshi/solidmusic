@@ -1,4 +1,5 @@
 import os
+import re
 import requests
 import datetime
 from platform import system, machine
@@ -36,9 +37,10 @@ def _human_time_duration(seconds):
 async def gstats_(client: Client, message: types.Message):
     chat_id = message.chat.id
     bot_me = await client.get_me()
+    rex = re.findall(r"[Bb][Oo][Tt]", bot_me.first_name)
     bot_fullname = (
         bot_me.first_name
-        if bot_me.first_name.endswith("bot")
+        if bot_me.first_name.endswith(rex)
         else f"{bot_me.first_name} bot"
     )
     msg = await message.reply(f"🔄 **{gm(chat_id, 'getting_global_stats')}**")

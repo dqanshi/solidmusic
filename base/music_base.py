@@ -91,18 +91,19 @@ class MusicBase(CallBase):
                     f"🙌 {gm(chat_id, 'req_by')}: {user.mention}",
                     disable_web_page_preview=True
                 )
-        elif len(playlist[chat_id]) >= 1:
-            playlist[chat_id].extend(
-                [
-                    {
-                        "title": title,
-                        "duration": duration,
-                        "user_id": user_id,
-                        "uri": yt_url,
-                        "yt_id": yt_id,
-                    }
-                ]
-            )
-            y = await cb.edit_message_text(gm(chat_id, "track_queued"))
-            await asyncio.sleep(5)
-            return await y.delete()
+        elif playlist:
+            if len(playlist[chat_id]) >= 1:
+                playlist[chat_id].extend(
+                    [
+                        {
+                            "title": title,
+                            "duration": duration,
+                            "user_id": user_id,
+                            "uri": yt_url,
+                            "yt_id": yt_id,
+                        }
+                    ]
+                )
+                y = await cb.edit_message_text(gm(chat_id, "track_queued"))
+                await asyncio.sleep(5)
+                return await y.delete()
