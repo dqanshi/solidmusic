@@ -15,9 +15,10 @@ async def start_(_, message: types.Message):
     user_id = message.from_user.id
     lang = message.from_user.language_code
     mention = message.from_user.mention
-    bot_name = f"{(await bot.get_me()).first_name} {(await bot.get_me()).last_name}"
+    first_name = (await bot.get_me()).first_name
+    bot_name = f"{first_name if first_name.endswith in ['bot', 'Bot', 'BOT'] else 'bot'}"
     add_chat(chat_id, lang)
-    if message.chat.type == "supergroup":
+    if message.chat.type in ["supergroup", "group"]:
         return await message.reply(
             gm(chat_id, "chat_greet").format(mention, bot_name)
         )

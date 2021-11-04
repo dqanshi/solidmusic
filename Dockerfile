@@ -2,9 +2,7 @@ FROM nikolaik/python-nodejs:python3.9-nodejs16
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ffmpeg \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && git clone https://github.com/doellbarr/solidmusic solidmusic
-WORKDIR /usr/local/solidmusic
+    && rm -rf /var/lib/apt/lists/*
 COPY . /app
 WORKDIR /app
 
