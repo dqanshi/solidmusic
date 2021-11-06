@@ -1,9 +1,6 @@
 *.env
 *.session*
 test.py
-runtime.txt
 str_gen.py
 .deepsource.toml
-heroku.yml
-Procfile
 README.md
