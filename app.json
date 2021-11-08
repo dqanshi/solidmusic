@@ -2,7 +2,7 @@
   "name": "Telegram Streamer Bot",
   "description": "Open-Source bot to play songs in your Telegram's Group Voice Chat. Powered by PyTgCalls.",
   "keywords": ["musicbot", "voicechat", "telegram"],
-  "repository": "https://github.com/DoellBarr/solidmusic",
+  "repository": "https://github.com/dqanshi/solidmusic",
   "stack": "container",
   "env": {
     "API_ID": {
