@@ -36,13 +36,13 @@ async def start_(_, message: types.Message):
                         [
                             button_keyboard(
                                 f"{emoji.LOUDSPEAKER} channel",
-                                url="https://t.me/solidprojects"
+                                url="https://t.me/danger_bots"
                             )
                         ],
                         [
                             button_keyboard(
-                                f"{emoji.FIRE} {gm(chat_id, 'maintainer')}",
-                                url="https://t.me/talktoabdul_bot"
+                                f"{emoji.FIRE} {gm(chat_id, 'Owner')}",
+                                url="https://t.me/alva_robot"
                             )
                         ]
                     ]
