@@ -41,7 +41,7 @@ async def start_(_, message: types.Message):
                         ],
                         [
                             button_keyboard(
-                                f"{emoji.FIRE} {gm(chat_id, 'Owner')}",
+                                f"{emoji.FIRE} {gm(chat_id, 'maintainer')}",
                                 url="https://t.me/alva_robot"
                             )
                         ]
